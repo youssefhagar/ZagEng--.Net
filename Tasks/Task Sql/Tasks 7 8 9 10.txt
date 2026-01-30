@@ -1,0 +1,55 @@
+## Part of Index problems (Problem 7)
+
+Create nonclustered index IX_AppLogs
+on AppLogs (service_name, created_at desc)
+
+
+====================================================================================
+
+
+## Problem 8
+## Problem 2: The "Key Lookup" Mystery (Covering Indexes)
+
+
+-- The index on ( order_date ) for the Query is non-Covering 
+-- we must make the index Covering for optmize the    performance fro the query
+
+
+====================================================================================
+
+
+## Part of Logic & Abstraction (Problem 9)
+## Problem 9: The "Dynamic Flash Sale" (Stored Procedures)
+
+
+
+CREATE PROCEDURE sp_ApplyCategoryDiscount @CategoryId INT,@DiscountPercent DECIMAL(5,2)
+AS
+    update Products
+    set price =(
+        case
+            when price - (price * @DiscountPercent / 100.0) < min_price
+                then min_price
+            else price - (price * @DiscountPercent / 100.0)
+        end )
+    where category_id = @CategoryId;
+
+
+
+
+====================================================================================
+
+## Part of Security & Reporting (Problem 10)
+## Problem 10: The "Marketing VIP Dashboard" (Views)
+
+
+
+CREATE VIEW vw_VIPCustomers
+AS
+SELECT
+    name,
+    email,
+    total_spent
+FROM Customers
+WHERE total_spent > 5000;
+
