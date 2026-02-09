@@ -1,0 +1,39 @@
+using System;
+using System.Runtime.InteropServices;
+
+namespace ZagEng_Task
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            /*  -- Links i Use For Get More information to Solve Task
+             * https://learn.microsoft.com/zh-cn/dotnet/api/system.environment?view=netcore-3.1
+             * https://learn.microsoft.com/zh-cn/dotnet/api/system.runtime.interopservices.runtimeinformation?view=netcore-3.1
+             */
+
+            string runtimeVersion = Environment.Version.ToString();
+            string os = RuntimeInformation.OSDescription;
+            string architecture = RuntimeInformation.OSArchitecture.ToString();
+
+            Console.WriteLine("=== Runtime Environment Info ===");
+            Console.WriteLine($"Runtime Version : {runtimeVersion}");
+            Console.WriteLine($"Operating System: {os}");
+            Console.WriteLine($"CPU Architecture: {architecture}");
+            Console.WriteLine();
+
+            string runtimeType = RuntimeInformation.FrameworkDescription switch   // This is anthor syntax for Switch ( to write Complex logic)
+            {
+                string r when r.Contains(".NET")
+                           && !r.Contains("Framework")
+                    => "Modern .NET Runtime",
+
+                _ => "Legacy Runtime"
+            };
+
+            Console.WriteLine($"Runtime Type: {runtimeType}");
+        }
+    }
+}
+
+
